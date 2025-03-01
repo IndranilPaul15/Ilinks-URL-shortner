@@ -14,7 +14,7 @@ const normalizeDevice = (os) => {
     const lowerOS = os.toLowerCase();
     if (lowerOS.includes('windows')) return 'Windows';
     if (lowerOS.includes('mac')) return 'Others';
-    if (lowerOS.includes('linux')) return 'Others';
+    if (lowerOS.includes('linux')) return 'Android';
     if (lowerOS.includes('android')) return 'Android';
     if (lowerOS.includes('ios') || lowerOS.includes('iphone') || lowerOS.includes('ipad')) return 'iOS';
     return 'Others';
