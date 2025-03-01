@@ -1,101 +1,66 @@
-import Image from "next/image";
+"use client";
+import Background from "@/components/Bg/Background";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import AuthManager from "@/components/auth/AuthManager";
+import { useOpen } from "@/components/context/OpenContext";
+import { useSession } from "next-auth/react";
 
-export default function Home() {
+export default function Page() {
+  const { open, setOpenA, toggle } = useOpen();
+  const { status } = useSession();
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div id="page" className="relative flex flex-col flex-1  bg-gradient-to-r from-[#3236B4] to-[#56CDEEFC]">
+      <div className="flex-1 flex-col  flex items-start z-10 justify-center text-white">
+        <div><Background /></div>
+        <div className="md:pl-48  size-full flex flex-col md:justify-center gap-2">
+          <motion.div
+            className="pl-5"
+            initial={{ x: "-100%" }}
+            animate={{ x: "0%" }}
+            transition={{ duration: 0.7, ease: "linear" }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <div className="text-[50px] mt-20 md:mt-0 font-bold my-5 baloo ">Short Links, Big Results </div>
+            <div className="md:mb-20 mb-10 baloo2 tracking-wider text-xl font-thin">
+              <p className="">iLinks - URL Shortener built with powerful tools, to help</p>
+              <p className="">and simplify your work links</p>
+            </div>
+          </motion.div>
+          <motion.div
+            className=" flex md:pl-5 w-fit flex-col mx-auto md:mx-0"
+            initial={{ x: "-100%" }}
+            animate={{ x: "0%" }}
+            transition={{ duration: 0.9, ease: "linear" }}
           >
-            Read our docs
-          </a>
+            <Link className="mx-auto md:mx-0" href="/Shortener">
+              <button
+                className=" group active:scale-90 relative inline-flex items-center justify-center rounded-full overflow-hidden border-2 border-purple-500 p-4   px-20 md:px-32  py-3 text-2xl font-bold text-white shadow-2xl  transition duration-300 ease-out hover:border-4 hover:border-double">
+                <span className="ease absolute inset-0 flex h-full w-full -translate-x-full items-center justify-center bg-purple-500 text-white duration-300 group-hover:translate-x-0">
+                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </span>
+                <span className="ease absolute flex h-full w-full transform items-center justify-center bg-[aliceblue] text-purple-500 transition-all duration-300 group-hover:translate-x-full">Get Started</span>
+                <span className="invisible relative">Get Started</span>
+              </button>
+            </Link>
+            {status === "unauthenticated" && (
+              <div className="md:pl-7 mt-4" >
+                <button onClick={() => setOpenA(true)} className="baloo mx-auto md:mx-0 text-2xl md:text-xl font-bold hover:font-extrabold flex flex-col md:flex-row gap-1 justify-center items-start active:scale-95" >
+                  <span className="drop-shadow-[0_0_3px_black]">Create an account to enjoy</span>
+                  <span className="drop-shadow-[0_0_5px_white] text-blue-900"> More Features</span>
+                </button>
+              </div>)}
+            {open && (<div className="flex text-black fixed top-[20%] md:top-[10%] right-0 md:left-1/3 ">
+              <div className="fixed inset-0 z-0 backdrop-blur-md bg-white/10">
+              </div>
+              <div className=" z-10">
+                <AuthManager setOpenA={setOpenA} toggle={toggle} />
+              </div>
+            </div>)}
+          </motion.div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+    </div >
+
   );
 }
