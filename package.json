@@ -11,7 +11,7 @@
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "chart.js": "^4.4.7",
-    "className-variance-authority": "^0.7.1",
+    "classname-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.475.0",
