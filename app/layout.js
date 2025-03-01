@@ -12,17 +12,20 @@ import { OpenProvider } from "@/components/context/OpenContext";
 const abril = Abril_Fatface({
   display: 'swap',
   weight: ["400"],
-  variable: "--font-abril"
+  variable: "--font-abril",
+  subsets: ['latin'],
 })
 const baloo2 = Baloo_Tamma_2({
   display: 'swap',
   weight: ["400", "700", "800"],
-  variable: "--font-baloo2"
+  variable: "--font-baloo2",
+  subsets: ['latin'],
 })
 const baloo = Baloo_Thambi_2({
   display: 'swap',
   weight: ["400", "700", "800"],
-  variable: "--font-baloo"
+  variable: "--font-baloo",
+  subsets: ['latin'],
 })
 
 const kalam = Kalam({
